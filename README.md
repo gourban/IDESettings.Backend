@@ -1,6 +1,6 @@
 # CodeStyle
 File -> Settings -> Tools -> Settings Repository
-Add gourban@vs-ssh.visualstudio.com:v3/gourban/Core/IDESettings.Backend to the "Read-only Sources"
+Add https://github.com/gourban/IDESettings.Backend to the "Read-only Sources"
 
 Then synchronize the settings by calling VCS -> Sync Settings -> Merge
 
