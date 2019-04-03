@@ -29,6 +29,14 @@
         <property name="eachLine" value="true"/>
     </module>
 
+    <!-- checkstyle sup-ression features -->
+    <module name="SuppressWarningsFilter" />
+    <module name="SuppressionCommentFilter">
+        <property name="offCommentFormat" value="CHECKSTYLE.OFF\: ([\w\|]+)"/>
+        <property name="onCommentFormat" value="CHECKSTYLE.ON\: ([\w\|]+)"/>
+        <property name="checkFormat" value="$1"/>
+    </module>
+
     <module name="TreeWalker">
         <module name="OuterTypeFilename"/>
         <module name="IllegalTokenText">
@@ -256,5 +264,9 @@
             <property name="exceptionVariableName" value="expected"/>
         </module>
         <module name="CommentsIndentation"/>
+
+        <!-- checkStyle suppression features -->
+        <module name="SuppressWarningsHolder" />
+        <module name="FileContentsHolder"/>
     </module>
 </module>
