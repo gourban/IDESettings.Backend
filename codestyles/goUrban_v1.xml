@@ -47,7 +47,6 @@
     <option name="RIGHT_MARGIN" value="200" />
     <option name="BLANK_LINES_BEFORE_PACKAGE" value="1" />
     <option name="SPACE_BEFORE_ARRAY_INITIALIZER_LBRACE" value="true" />
-    <option name="SPACE_BEFORE_ANNOTATION_ARRAY_INITIALIZER_LBRACE" value="true" />
     <option name="THROWS_KEYWORD_WRAP" value="1" />
     <option name="BINARY_OPERATION_SIGN_ON_NEXT_LINE" value="true" />
     <option name="IF_BRACE_FORCE" value="3" />
