@@ -42,7 +42,6 @@
         <package name="" withSubpackages="true" static="false" />
       </value>
     </option>
-    <option name="JD_ALIGN_PARAM_COMMENTS" value="false" />
   </JavaCodeStyleSettings>
   <SqlCodeStyleSettings version="2">
     <option name="QUERY_SECTION_1ST_WORD_ALIGN" value="2" />
