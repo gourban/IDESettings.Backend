@@ -33,6 +33,8 @@
       <value>
         <package name="" withSubpackages="true" static="true" />
         <emptyLine />
+        <package name="co.gourban" withSubpackages="true" static="false" />
+        <emptyLine />
         <package name="eu.gourban" withSubpackages="true" static="false" />
         <emptyLine />
         <package name="java" withSubpackages="true" static="false" />
