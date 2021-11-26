@@ -266,6 +266,12 @@
             <property name="exceptionVariableName" value="expected|ignored"/>
         </module>
         <module name="CommentsIndentation"/>
+        <module name="Regexp">
+            <property name="format" value="SELECT\s\*"/>
+            <property name="message" value="SELECT *&#39; if possible use instead: &#39;SELECT r.* FROM rentals r;"/>
+            <property name="illegalPattern" value="true"/>
+            <property name="ignoreComments" value="true"/>
+        </module>
 
         <!-- checkStyle suppression features -->
         <module name="SuppressWarningsHolder" />
