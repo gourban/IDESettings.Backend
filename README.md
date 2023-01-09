@@ -15,5 +15,5 @@ File -> Settings -> Plugins -> Marketplace -> CheckStyle-IDEA
 ## Set checkStyle config
 File -> Settings -> Other Settings -> Checkstyle
 Set "Scan Scope" to "Only Java sources (including tests)"
-Add configuration file from URL "https://raw.githubusercontent.com/gourban/IDESettings.Backend/master/checkStyleConfig/goUrban_v1.xml" and set it active
+Add configuration file from URL "https://raw.githubusercontent.com/gourban/IDESettings.Backend/master/checkStyleConfig/goUrban_v2.xml" and set it active
 
