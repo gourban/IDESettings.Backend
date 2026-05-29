@@ -6,7 +6,7 @@ Then synchronize the settings by calling VCS -> Sync Settings -> Merge
 
 Make sure the correct CodeStyle config is avtive:
 File -> Settings -> Editor -> CodeStyle
-It should say "goUrban_v1" after "Scheme:"
+It should say "goUrban_v2" after "Scheme:"
 
 # CheckStyle Setup
 ## Plugin installation
@@ -15,5 +15,5 @@ File -> Settings -> Plugins -> Marketplace -> CheckStyle-IDEA
 ## Set checkStyle config
 File -> Settings -> Other Settings -> Checkstyle
 Set "Scan Scope" to "Only Java sources (including tests)"
-Add configuration file from URL "https://raw.githubusercontent.com/gourban/IDESettings.Backend/master/checkStyleConfig/goUrban_v2.xml" and set it active
+Add configuration file from URL "https://raw.githubusercontent.com/gourban/IDESettings.Backend/master/checkStyleConfig/goUrban_v3.xml" and set it active
 
