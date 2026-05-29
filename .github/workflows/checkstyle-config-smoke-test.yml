@@ -1,0 +1,69 @@
+name: Checkstyle config smoke test
+
+# These config files are consumed live via raw.githubusercontent URLs, so a malformed
+# config or a broken module breaks every developer who syncs. This workflow proves that
+# checkStyleConfig/goUrban_v3.xml (a) parses on the latest Checkstyle and (b) actually groups
+# jakarta with the java/javax standard imports as one contiguous group (the java -> jakarta -> javax
+# order itself is produced by the IntelliJ codestyle, not enforced here).
+
+on:
+  push:
+    paths:
+      - 'checkStyleConfig/**'
+      - '.checkstyle-test/**'
+      - '.github/workflows/checkstyle-config-smoke-test.yml'
+  pull_request:
+    paths:
+      - 'checkStyleConfig/**'
+      - '.checkstyle-test/**'
+      - '.github/workflows/checkstyle-config-smoke-test.yml'
+  workflow_dispatch:
+
+jobs:
+  smoke-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up JDK
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      - name: Download latest Checkstyle CLI
+        run: |
+          set -euo pipefail
+          TAG=$(curl -sSL https://api.github.com/repos/checkstyle/checkstyle/releases/latest | jq -r .tag_name)
+          VER=${TAG#checkstyle-}
+          echo "Using Checkstyle $VER"
+          curl -sSL -o checkstyle.jar \
+            "https://github.com/checkstyle/checkstyle/releases/download/${TAG}/checkstyle-${VER}-all.jar"
+
+      - name: Use a local suppression file (raw URL not resolvable on a branch/PR)
+        run: |
+          set -euo pipefail
+          sed -E 's#https://raw.githubusercontent.com/[^"]*/suppression_v3\.xml#checkStyleConfig/suppression_v3.xml#' \
+            checkStyleConfig/goUrban_v3.xml > /tmp/config.xml
+
+      - name: Good fixture must have NO CustomImportOrder violation
+        run: |
+          set -uo pipefail
+          java -jar checkstyle.jar -c /tmp/config.xml .checkstyle-test/GoodImports.java > good.out 2>&1 || true
+          echo '--- checkstyle output ---'; cat good.out
+          if grep -q '\[CustomImportOrder\]' good.out; then
+            echo "FAIL: GoodImports.java reported an CustomImportOrder violation but should be clean."
+            exit 1
+          fi
+          echo "OK: no CustomImportOrder violation on the good fixture."
+
+      - name: Bad fixture MUST have an CustomImportOrder violation
+        run: |
+          set -uo pipefail
+          java -jar checkstyle.jar -c /tmp/config.xml .checkstyle-test/BadImports.java > bad.out 2>&1 || true
+          echo '--- checkstyle output ---'; cat bad.out
+          if ! grep -q '\[CustomImportOrder\]' bad.out; then
+            echo "FAIL: BadImports.java did NOT report an CustomImportOrder violation but should have."
+            exit 1
+          fi
+          echo "OK: CustomImportOrder violation correctly flagged on the bad fixture."

@@ -1,6 +1,6 @@
 # CodeStyle
 File -> Settings -> Tools -> Settings Repository
-Add https://github.com/gourban/IDESettings.Backend to the "Read-only Sources"
+Add https://github.com/Wunder-Mobility/ide-settings-backend to the "Read-only Sources"
 
 Then synchronize the settings by calling VCS -> Sync Settings -> Merge
 
@@ -20,7 +20,7 @@ It was previously pinned to a 10.x release; `goUrban_v3.xml` is verified to run 
 ## Set checkStyle config
 File -> Settings -> Other Settings -> Checkstyle
 Set "Scan Scope" to "Only Java sources (including tests)"
-Add configuration file from URL "https://raw.githubusercontent.com/gourban/IDESettings.Backend/master/checkStyleConfig/goUrban_v3.xml" and set it active
+Add configuration file from URL "https://raw.githubusercontent.com/Wunder-Mobility/ide-settings-backend/main/checkStyleConfig/goUrban_v3.xml" and set it active
 
 # Import order convention
 `goUrban_v3` (CheckStyle) and `goUrban_v2` (CodeStyle) add support for the `jakarta` package

@@ -32,7 +32,7 @@
     <!-- checkstyle suppression features -->
     <module name="SuppressWarningsFilter" />
     <module name="SuppressionFilter">
-        <property name="file" value="https://raw.githubusercontent.com/gourban/IDESettings.Backend/master/checkStyleConfig/suppression.xml"/>
+        <property name="file" value="https://raw.githubusercontent.com/Wunder-Mobility/ide-settings-backend/main/checkStyleConfig/suppression.xml"/>
         <property name="optional" value="false"/>
     </module>
 
