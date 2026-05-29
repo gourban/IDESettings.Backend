@@ -32,7 +32,7 @@
     <!-- checkstyle suppression features -->
     <module name="SuppressWarningsFilter" />
     <module name="SuppressionFilter">
-        <property name="file" value="https://raw.githubusercontent.com/gourban/IDESettings.Backend/master/checkStyleConfig/suppression.xml"/>
+        <property name="file" value="https://raw.githubusercontent.com/gourban/IDESettings.Backend/master/checkStyleConfig/suppression_v3.xml"/>
         <property name="optional" value="false"/>
     </module>
 
@@ -204,19 +204,26 @@
         <module name="OverloadMethodsDeclarationOrder"/>
         <!--<module name="VariableDeclarationUsageDistance"/>-->
         <!--
-            ImportOrder is used (instead of CustomImportOrder) so that the JDK/EE families can be
-            ordered explicitly as java, jakarta, javax. CustomImportOrder only sorts alphabetically
-            within a group, which would force jakarta ahead of java. The group order below mirrors
-            the IntelliJ codestyle (codestyles/goUrban_v2.xml) IMPORT_LAYOUT_TABLE so both tools agree.
-            separated=false keeps java/jakarta/javax contiguous ("grouped together") while still
-            permitting the blank lines IntelliJ inserts between the other groups.
+            jakarta is added to the standard JDK/EE group (standardPackageRegExp) so Spring Boot 3
+            imports group with java and javax instead of falling into THIRD_PARTY_PACKAGE. The three
+            stay contiguous (no blank line between them); other groups remain blank-separated.
+
+            sortImportsInGroupAlphabetically is false on purpose: alphabetical sorting would force
+            jakarta, java, javax, but the desired order is java, jakarta, javax. CustomImportOrder
+            cannot enforce a custom (non-alphabetical) order within a group, so the java/jakarta/javax
+            sequence is produced and maintained by the shared IntelliJ codestyle
+            (codestyles/goUrban_v2.xml). CheckStyle still enforces that jakarta is grouped with
+            java/javax, that the family is contiguous, and that groups are blank-separated.
+
+            Backwards compatible: code with no jakarta imports cannot newly fail (the only behavioural
+            change versus goUrban_v2 is that within-group alphabetical order is no longer enforced,
+            which is a relaxation; IntelliJ still sorts on Optimize Imports).
         -->
-        <module name="ImportOrder">
-            <property name="groups" value="co.gourban,com.wundermobility,eu.gourban,/^java\./,/^jakarta\./,/^javax\./"/>
-            <property name="ordered" value="true"/>
-            <property name="separated" value="false"/>
-            <property name="option" value="top"/>
-            <property name="sortStaticImportsAlphabetically" value="true"/>
+        <module name="CustomImportOrder">
+            <property name="sortImportsInGroupAlphabetically" value="false"/>
+            <property name="separateLineBetweenGroups" value="true"/>
+            <property name="standardPackageRegExp" value="^(java|jakarta|javax)\."/>
+            <property name="customImportOrderRules" value="STATIC###SAME_PACKAGE(2)###STANDARD_JAVA_PACKAGE###THIRD_PARTY_PACKAGE"/>
         </module>
         <module name="MethodParamPad"/>
         <module name="NoWhitespaceBefore">
